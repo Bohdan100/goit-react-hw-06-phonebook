@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { filterContacts } from 'redux/slice/filterSlice';
 
-import { FilterLabel, FilterInput } from '../Phonebook.styled';
+import { FilterLabel, FilterInput } from './Filter.styled';
 
 export const Filter = () => {
   const dispatch = useDispatch();

@@ -1,23 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { nanoid } from '@reduxjs/toolkit';
 import { addContact } from 'redux/slice/contactsSlice';
+import { changeLocalStorage } from 'functions/LocalStorage';
 
 import shortid from 'shortid';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { changeLocalStorage } from './LocalStorage';
+import { getContacts } from 'redux/selectors';
 
 import {
   PhonebookForm,
   PhonebookFormButton,
   PhonebookFormLabel,
   PhonebookFormInput,
-} from '../Phonebook.styled';
+} from './ContactForm.styled';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
 
   const nameId = shortid.generate();
   const telId = shortid.generate();
@@ -25,23 +27,27 @@ export const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const userName = e.target.elements.name.value;
-    const userNumber = e.target.elements.number.value;
+    const form = e.target;
+    const userName = form.elements.name.value;
+    const userNumber = form.elements.number.value;
 
-    console.log('handleSubmit-contacts', contacts);
     const errorArray = contacts.filter(
       contact => contact.name.toLowerCase() === userName.toLowerCase()
     );
 
     if (errorArray.length === 0) {
-      dispatch(addContact({ name: userName, number: userNumber }));
+      const newContact = { id: nanoid(), name: userName, number: userNumber };
+      dispatch(addContact(newContact));
+
       toast.success('You add a new contact in your Phonebook!');
+
+      const storageItems = contacts.concat(newContact);
+      changeLocalStorage('contacts', storageItems);
     } else {
       toast.info('This contact is already in your Phonebook!');
     }
-    changeLocalStorage('contacts', contacts);
 
-    // PhonebookForm.reset();
+    form.reset();
   };
 
   return (

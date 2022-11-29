@@ -1,17 +1,25 @@
-import { ThemeProvider } from '@emotion/react';
+import { ThemeProvider } from 'styled-components';
 import { theme } from 'constants';
 import { GlobalStyle } from 'GlobalStyle';
 
-import { AppContainer } from 'App.styled';
-import { Phonebook } from 'components';
+import { PhonebookTitle, ContactsTitle } from 'App.styled';
+import { Box } from './constants';
+import { ContactForm } from './components/ContactForm';
+import { Contacts } from './components/Contacts';
+import { Filter } from './components/Filter';
 
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AppContainer>
-        <Phonebook />
-      </AppContainer>
+      <Box width="320px" m={[4, 'auto']} as="div">
+        <PhonebookTitle>Phonebook</PhonebookTitle>
+        <ContactForm />
+
+        <ContactsTitle>Contacts</ContactsTitle>
+        <Filter />
+        <Contacts />
+      </Box>
     </ThemeProvider>
   );
 };

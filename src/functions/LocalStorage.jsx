@@ -5,4 +5,8 @@ const changeLocalStorage = (key, state) => {
   window.localStorage.setItem(key, JSON.stringify(state));
 };
 
-export { getFromLocalStorage, changeLocalStorage };
+const getContactsForDelete = key => {
+  return JSON.parse(window.localStorage.getItem(key));
+};
+
+export { getFromLocalStorage, changeLocalStorage, getContactsForDelete };
