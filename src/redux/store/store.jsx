@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { devToolsEnhancer } from '@redux-devtools/extension';
-import { contactsSlice, filterSlice } from './usersSlice';
+import { contactsSlice } from '../slice/contactsSlice';
+import { filterSlice } from '../slice/filterSlice';
 
 const enhancer = devToolsEnhancer();
 

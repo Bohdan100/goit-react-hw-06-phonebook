@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/usersSlice';
+import { addContact } from 'redux/slice/contactsSlice';
 
 import shortid from 'shortid';
 import { ToastContainer } from 'react-toastify';
