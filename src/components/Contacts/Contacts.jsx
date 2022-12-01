@@ -9,10 +9,16 @@ export const Contacts = () => {
   const contacts = useSelector(getContacts);
   const filterName = useSelector(getFilter);
 
-  const findVisibleContacts = () =>
-    contacts.filter(contact => contact.name.toLowerCase().includes(filterName));
+  let visibleContacts = [];
 
-  const visibleContacts = findVisibleContacts();
+  if (contacts) {
+    const findVisibleContacts = () =>
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filterName)
+      );
+
+    visibleContacts = findVisibleContacts();
+  }
 
   return (
     <ContactsList>

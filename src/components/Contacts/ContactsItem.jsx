@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 import { useDispatch } from 'react-redux';
 import { removeContact } from 'redux/slice/contactsSlice';
-import {
-  getContactsForDelete,
-  changeLocalStorage,
-} from 'functions/LocalStorage';
 
 import {
   ContactsListItem,
@@ -19,13 +15,6 @@ export const ContactsItem = ({ id, name, number }) => {
 
   const handleClick = () => {
     dispatch(removeContact(id));
-
-    console.log('id', id);
-    const localStorageContacts = getContactsForDelete('contacts');
-    const newContacts = localStorageContacts.filter(
-      localContact => localContact.id !== id
-    );
-    changeLocalStorage('contacts', newContacts);
   };
 
   return (

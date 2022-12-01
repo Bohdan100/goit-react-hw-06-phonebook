@@ -37,8 +37,8 @@ export const ContactForm = () => {
 
     if (errorArray.length === 0) {
       const newContact = { id: nanoid(), name: userName, number: userNumber };
-      dispatch(addContact(newContact));
 
+      dispatch(addContact(newContact));
       toast.success('You add a new contact in your Phonebook!');
 
       const storageItems = contacts.concat(newContact);
