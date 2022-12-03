@@ -1,1 +1,5 @@
-export { getContacts, getFilter } from './selectors';
+export {
+  selectContacts,
+  selectFilter,
+  selectVisibleContacts,
+} from './selectors';

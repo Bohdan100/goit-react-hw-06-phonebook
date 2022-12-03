@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 import {
   PhonebookForm,
@@ -19,7 +19,7 @@ import {
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const nameId = shortid.generate();
   const telId = shortid.generate();
