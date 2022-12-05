@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { addContact } from 'redux/slice/contactsSlice';
-import { changeLocalStorage } from 'functions/LocalStorage';
 
 import shortid from 'shortid';
 import { ToastContainer } from 'react-toastify';
@@ -21,8 +20,8 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
-  const nameId = shortid.generate();
-  const telId = shortid.generate();
+  const nameId = shortid.generate(4);
+  const telId = shortid.generate(4);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -36,13 +35,10 @@ export const ContactForm = () => {
     );
 
     if (errorArray.length === 0) {
-      const newContact = { id: nanoid(), name: userName, number: userNumber };
+      const newContact = { id: nanoid(4), name: userName, number: userNumber };
 
       dispatch(addContact(newContact));
       toast.success('You add a new contact in your Phonebook!');
-
-      const storageItems = contacts.concat(newContact);
-      changeLocalStorage('contacts', storageItems);
     } else {
       toast.info('This contact is already in your Phonebook!');
     }
@@ -60,7 +56,6 @@ export const ContactForm = () => {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          id={shortid.generate()}
         />
         <PhonebookFormLabel htmlFor={telId}>Number</PhonebookFormLabel>
         <PhonebookFormInput
